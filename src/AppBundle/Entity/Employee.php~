@@ -1,0 +1,85 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Employee
+ *
+ * @ORM\Table(name="employee", indexes={@ORM\Index(name="fk_employee_map_department1_idx", columns={"map_department_id"})})
+ * @ORM\Entity
+ */
+class Employee
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="employee_name", type="string", length=150, nullable=false)
+     */
+    private $employeeName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=45, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     */
+    private $address;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_of_birth", type="date", nullable=false)
+     */
+    private $dateOfBirth;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tp_number", type="integer", nullable=false)
+     */
+    private $tpNumber;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="date", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\MapDepartment
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MapDepartment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="map_department_id", referencedColumnName="id")
+     * })
+     */
+    private $mapDepartment;
+
+
+}
+

@@ -1,0 +1,11 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    
+app_bundle_route:
+    path:     /sub_department
+    defaults: { _controller: AppBundle:MapDepartment:sub_department }
+  
+homepage:
+    path:   /
+    defaults:  { _controller: AppBundle:Employee:index}

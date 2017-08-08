@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Audittrails list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tablename</th>
+                <th>Oldvalue</th>
+                <th>Newvalue</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auditTrail in auditTrails %}
+            <tr>
+                <td><a href="{{ path('audittrail_show', { 'id': auditTrail.id }) }}">{{ auditTrail.tableName }}</a></td>
+                <td>{{ auditTrail.oldValue }}</td>
+                <td>{{ auditTrail.newValue }}</td>
+                <td>{% if auditTrail.createdAt %}{{ auditTrail.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if auditTrail.updatedAt %}{{ auditTrail.updatedAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ auditTrail.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('audittrail_show', { 'id': auditTrail.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('audittrail_edit', { 'id': auditTrail.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('audittrail_new') }}">Create a new auditTrail</a>
+        </li>
+    </ul>
+{% endblock %}

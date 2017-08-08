@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="ibox-content">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {# pass an array argument to get the messages of those types  #}
+    {% for label, messages in app.flashes(['warning', 'error','danger']) %}
+        {% for message in messages %}
+            <div class="ibox-content">
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h1>Mapdepartment</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if mapDepartment.createdAt %}{{ mapDepartment.createdAt|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if mapDepartment.updatedAt %}{{ mapDepartment.updatedAt|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ mapDepartment.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('mapdepartment_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('mapdepartment_edit', { 'id': mapDepartment.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     {% for message in app.flashes('notice') %}
+        <div class="ibox-content">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {# pass an array argument to get the messages of those types  #}
+    {% for label, messages in app.flashes(['warning', 'error']) %}
+        {% for message in messages %}
+            <div class="ibox-content">
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Subdepartment</h5>
+            </div>
+            <div class="ibox-content col-lg-12">
+                <form>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Department Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" disabled="true" class="form-control" value="{{ subDepartment.subDepartmentName }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Department Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" disabled="true" class="form-control" value="{{ subDepartment.createdAt|date('Y-m-d') }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Department Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" disabled="true" class="form-control" value="{{ subDepartment.updatedAt|date('Y-m-d') }}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MapDepartment" table="map_department" repository-class="AppBundle\Repository\MapDepartmentRepository">
+    <indexes>
+      <index name="fk_map_department_sub_department1_idx" columns="sub_department_id"/>
+      <index name="fk_map_department_departments1_idx" columns="departments_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createdAt" type="date" column="created_at" nullable="false"/>
+    <field name="updatedAt" type="date" column="updated_at" nullable="false"/>
+    <many-to-one field="departments" target-entity="Departments" fetch="LAZY">
+      <join-columns>
+        <join-column name="departments_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subDepartment" target-entity="SubDepartment" fetch="LAZY">
+      <join-columns>
+        <join-column name="sub_department_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

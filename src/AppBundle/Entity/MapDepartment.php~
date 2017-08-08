@@ -1,0 +1,60 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MapDepartment
+ *
+ * @ORM\Table(name="map_department", indexes={@ORM\Index(name="fk_map_department_sub_department1_idx", columns={"sub_department_id"}), @ORM\Index(name="fk_map_department_departments1_idx", columns={"departments_id"})})
+ * @ORM\Entity
+ */
+class MapDepartment
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="date", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\Departments
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Departments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="departments_id", referencedColumnName="id")
+     * })
+     */
+    private $departments;
+
+    /**
+     * @var \AppBundle\Entity\SubDepartment
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SubDepartment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sub_department_id", referencedColumnName="id")
+     * })
+     */
+    private $subDepartment;
+
+
+}
+

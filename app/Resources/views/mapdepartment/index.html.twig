@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+   {% for message in app.flashes('notice') %}
+        <div class="ibox-content">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {# pass an array argument to get the messages of those types  #}
+    {% for label, messages in app.flashes(['warning', 'error','danger']) %}
+        {% for message in messages %}
+            <div class="ibox-content">
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Mapdepartments list</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Createdat</th>
+                                <th>Updatedat</th>
+                                <th>Id</th>
+                                <th>Departments</th>
+                                <th>Sub Department</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mapDepartment in mapDepartments %}
+                                <tr>
+                                    <td><a href="{{ path('mapdepartment_show', { 'id': mapDepartment.id }) }}">{{ mapDepartment.createdAt|date('Y-m-d') }}</a></td>
+                                    <td>{% if mapDepartment.updatedAt %}{{ mapDepartment.updatedAt|date('Y-m-d') }}{% endif %}</td>
+                                    <td>{{ mapDepartment.id }}</td>
+                                    <td>{{ mapDepartment.departments.getDepartmentName }}</td>
+                                    <td>{{ mapDepartment.subDepartment.getSubDepartmentName }}</td>
+                                    <td>
+                   
+                                        <a href="{{ path('mapdepartment_edit', { 'id': mapDepartment.id }) }}" class="btn btn-warning btn-xs">edit</a>
+                                        
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}

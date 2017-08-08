@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     
+    {% for message in app.flashes('notice') %}
+        <div class="ibox-content">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {# pass an array argument to get the messages of those types  #}
+    {% for label, messages in app.flashes(['warning', 'error']) %}
+        {% for message in messages %}
+            <div class="ibox-content">
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Employee</h5>
+            </div>
+            <div class="ibox-content col-lg-12">
+                <form method="POST">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Employee Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" disabled="true" id="appbundle_employee_employeeName" name="employeeName" value="{{ employee.employeeName }}" required="required" placeholder="Enter Employee Name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="email" disabled="true" id="appbundle_employee_email" name="email" value="{{ employee.email }}" required="required" placeholder="Enter Employee Name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Address</label>
+                    <div class="col-lg-10">
+                        <input type="text" disabled="true" id="appbundle_employee_address" name="address" value="{{ employee.address }}" required="required" placeholder="Enter Employee Name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Tp Number</label>
+                    <div class="col-lg-10">
+                        <input type="number" disabled="true" id="appbundle_employee_tpNumber" name="tpNumber" value="{{ employee.tpNumber }}" required="required" placeholder="Enter Employee Name" class="form-control">
+                    </div>
+                </div>
+                    	
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Department</label>
+                    <div class="col-lg-10">
+                        <select id="appbundle_employee_mapDepartment" disabled="true" name="mapDepartment" class="form-control">
+                            {% for department in departments %}
+                                <option value="{{department.id}}" {% if department.id == employee.mapDepartment.departments.id %} selected="true"{% endif %}>{{department.departmentName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                        	
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Sub Department</label>
+                    <div class="col-lg-10">
+                        
+                        <select id="appbundle_employee_subDepartment" disabled="true" name="subDepartment" class="form-control">
+                             {% for sudDepartment in sudDepartments %}
+                            <option value="{{sudDepartment.id}}" {% if sudDepartment.id == employee.mapDepartment.subDepartment.id %} selected="true"{% endif %} >{{sudDepartment.subDepartmentName}}</option>
+                             {% endfor %}
+                        </select>
+                    </div>
+                </div>
+               <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

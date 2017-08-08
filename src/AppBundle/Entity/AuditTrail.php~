@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AuditTrail
+ *
+ * @ORM\Table(name="audit_trail")
+ * @ORM\Entity
+ */
+class AuditTrail
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="table_name", type="string", length=45, nullable=false)
+     */
+    private $tableName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="old_value", type="text", nullable=false)
+     */
+    private $oldValue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="new_value", type="text", nullable=false)
+     */
+    private $newValue;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="date", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

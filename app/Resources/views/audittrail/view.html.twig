@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}   
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Audit Trail</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    {% for auditTrail in auditTrails %} 
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="7">{% if auditTrail.createdAt %}{{ auditTrail.createdAt|date('Y-m-d h:m') }}{% endif %}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Column </th>
+                                    <th>Old Values</th>
+                                    <th>New Values</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td>Employee Name</td>
+                                    <td>{{auditTrail.oldValue.employeeName}}</td>
+                                    <td>{{auditTrail.newValue.employeeName}}</td>
+                                      
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{auditTrail.oldValue.email}}</td>
+                                    <td>{{auditTrail.newValue.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>{{auditTrail.oldValue.address}}</td>
+                                    <td>{{auditTrail.newValue.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tp Number</td>
+                                    <td>{{auditTrail.oldValue.tpNumber}}</td>
+                                    <td>{{auditTrail.newValue.tpNumber}}</td>
+                                </tr>
+                            </tbody>
+                        </table>        
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}
